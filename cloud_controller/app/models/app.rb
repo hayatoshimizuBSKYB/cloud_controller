@@ -96,7 +96,7 @@ class App < ActiveRecord::Base
   end
 
   def set_defaults
-    self.metadata ||= {}
+    self.metadata ||= {} if new_record?
   end
 
   def total_memory
