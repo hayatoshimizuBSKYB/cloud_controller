@@ -1,4 +1,5 @@
 require 'uri'
+require 'fileutils'
 
 # Handles app downloads and droplet uploads from the stagers.
 #
@@ -82,7 +83,7 @@ class StagingController < ApplicationController
 
     begin
       CloudController.logger.debug("Renaming staged droplet from '#{src_path}' to '#{upload.upload_path}'")
-      File.rename(src_path, upload.upload_path)
+      FileUtils.mv(src_path, upload.upload_path)
     rescue => e
       CloudController.logger.error("Failed uploading staged droplet: #{e}", :tags => [:staging])
       CloudController.logger.error(e)
